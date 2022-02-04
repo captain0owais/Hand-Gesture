@@ -31,3 +31,27 @@ function speak(){
     var utterThis=new SpeechSynthesisUtterance(speak_data_1);
     synth.speak(utterThis);
 }
+
+function check(){
+    img = document.getElementById("captured_img")
+    classifier.classify( img , gotResult );
+}
+
+function gotResult(error , result){
+    if(error){
+        console.error(error);
+    }else{
+        console.log(result);
+        result1=result[0].label;
+        document.getElementById("result_emotion_name_1").innerHTML=result1;
+        prediction_1 = result1;
+        speak();
+        if(result1 == "Best"){
+            document.getElementById("emoji").innerHTML="👍🏻";
+        }else if(result1 == "Amazing"){
+            document.getElementById("emoji").innerHTML="👌🏻";
+        }else{
+            document.getElementById("emoji").innerHTML="✌🏻";
+        }
+    }
+}
